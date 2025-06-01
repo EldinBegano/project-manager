@@ -1,1 +1,281 @@
-= Project Manager
+= MLP Project Manager
+:toc: left
+:toclevels: 3
+:icons: font
+:source-highlighter: rouge
+:sectlinks:
+:sectanchors:
+:imagesdir: assets
+:experimental:
+
+[.lead]
+A beautiful, terminal-based project manager inspired by LazyGit's interface design. Create and manage your development projects with style and efficiency.
+
+image::https://img.shields.io/badge/Java-23-blue.svg[Java Version]
+
+==  Features
+
+=== Project Management
+* ** List all projects** with last modified dates and language detection
+* ** Create new projects** with proper folder structure and templates
+* ** Workspace management** with configurable project directories
+* ** Beautiful terminal UI** with colors, icons, and box drawing characters
+
+=== Language Support
+[cols="1,1,1,1"]
+|===
+|Language |Icon |Template |Build Tool
+
+|☕ Java
+|Maven project structure
+|`pom.xml`, JUnit setup
+|Maven
+
+|🟨 JavaScript
+|Node.js project structure
+|`package.json`, npm scripts
+|npm
+
+|🎯 Dart
+|Dart project structure
+|`pubspec.yaml`, test setup
+|Dart SDK
+
+|🐹 Go
+|Go module structure
+|`go.mod`, proper layout
+|Go toolchain
+|===
+
+=== Git Integration
+* ** Optional Git initialization** during project creation
+* ** Automatic `.gitignore`** generation per language
+* ** Initial commit** creation with project files
+
+==  Quick Start
+
+=== Prerequisites
+* Java 11 or higher
+* Git (optional, for Git integration)
+* Terminal with Unicode support for best experience
+
+=== Installation
+
+1. **Clone or download** the `ProjectManager.java` file
+2. **Compile** the project:
++
+[source,bash]
+----
+javac ProjectManager.java
+----
+
+3. **Run** the project manager:
++
+[source,bash]
+----
+java ProjectManager
+----
+
+==  Usage Guide
+
+=== Main Menu
+
+When you start the project manager, you'll see a beautiful interface:
+
+----
+┌──────────────────────────────────────────────────────
+│  PROJECT MANAGER
+├──────────────────────────────────────────────────────
+│ Workspace: /home/user/Projects
+└──────────────────────────────────────────────────────
+
+┌─ Main Menu ────────────────────────
+│
+│ 1 → Show all projects
+│ 2 → Create new project
+│ 3 → Change workspace directory
+│ 4 → Exit
+│
+└───────────────────────────────────
+
+❯ Enter your choice:
+----
+
+=== Creating Projects
+
+When creating a new project:
+
+1. **Enter project name** (special characters will be sanitized)
+2. **Select language** from the supported options
+3. **Choose Git initialization** (y/n)
+4. **Project is created** with proper structure
+5. **Terminal automatically navigates** to the new project directory
+
+==== Project Templates
+
+Each language template includes:
+
+[tabs]
+====
+Java::
++
+--
+* Maven project structure (`src/main/java`, `src/test/java`)
+* `pom.xml` with Java 11+ configuration
+* JUnit dependency for testing
+* Sample `Main.java` class
+* Java-specific `.gitignore`
+--
+
+JavaScript::
++
+--
+* `package.json` with npm scripts
+* `index.js` entry point
+* `src/` and `test/` directories
+* Node.js-specific `.gitignore`
+--
+
+Dart::
++
+--
+* `pubspec.yaml` with Dart SDK constraints
+* `lib/`, `bin/`, and `test/` directories
+* Sample `main.dart` in `bin/`
+* Dart-specific `.gitignore`
+--
+
+Go::
++
+--
+* `go.mod` with Go 1.21+ support
+* `main.go` entry point
+* Standard Go project layout (`cmd/`, `pkg/`, `internal/`)
+* Go-specific `.gitignore`
+--
+====
+
+=== Project Listing
+
+The project list shows:
+
+* **Project names** (truncated if too long)
+* **Last modified dates** in readable format
+* **Language detection** with colored icons
+* **Alternating row colors** for better readability
+
+=== Workspace Management
+
+* **Change workspace directory** to organize projects differently
+* **Automatic directory creation** if the path doesn't exist
+* **Configuration persistence** across sessions
+
+==  Configuration
+
+=== Config File Location
+Configuration is stored in: `~/.project_manager_config`
+
+=== Supported Settings
+Currently stores:
+* **Workspace path** - where projects are created and managed
+
+=== Environment Variables
+* `SHELL` - Used for terminal integration when navigating to projects
+
+==  Advanced Usage
+
+=== Custom Workspace
+Change your workspace to organize projects by client, technology, or any structure:
+
+[source,bash]
+----
+# Example workspace structures
+~/Projects/work/        # Work projects
+~/Projects/personal/    # Personal projects
+~/Projects/learning/    # Learning projects
+~/Development/clients/  # Client work
+----
+
+=== Git Workflow
+When Git initialization is enabled:
+
+1. `git init` in project directory
+2. All files added to staging
+3. Initial commit created automatically
+4. Ready for remote repository setup
+
+=== Shell Integration
+The project manager integrates with your shell:
+
+* **Bash** - `cd` and `exec bash`
+* **Zsh** - `cd` and `exec zsh`
+* **Fish** - `cd` and `exec fish`
+* **Other shells** - Generic fallback
+
+==  Development
+
+=== Adding New Languages
+To add support for a new language:
+
+1. Add enum value to `ProjectLanguage`
+2. Add case to language switch statements
+3. Implement `createXxxProject()` method
+4. Add language detection in `detectProjectLanguage()`
+5. Add color and icon in respective methods
+6. Create appropriate `.gitignore` template
+
+=== Customizing Templates
+Language templates are defined in methods like:
+* `createJavaProject()`
+* `createJavaScriptProject()`
+* `createDartProject()`
+* `createGoProject()`
+
+Each method creates the appropriate directory structure and template files.
+
+==  Examples
+
+=== Creating a Java Project
+[source,bash]
+----
+$ java ProjectManager
+
+# Select option 2 (Create new project)
+# Enter name: "my-awesome-app"
+# Select language: 1 (Java)
+# Initialize Git: y
+
+# Result: Project created and terminal navigated to:
+# ~/Projects/my-awesome-app/
+----
+
+=== Project Structure (Java)
+[source]
+----
+my-awesome-app/
+├── pom.xml
+├── README.md
+├── .gitignore
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── Main.java
+│   │   └── resources/
+│   └── test/
+│       └── java/
+└── .git/ (if Git was initialized)
+----
+
+==  License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+== Acknowledgments
+
+* Inspired by **LazyGit**'s terminal interface
+
+---
+
+**Happy coding!**
+
+For issues or feature requests, please create an issue in the project repository.
