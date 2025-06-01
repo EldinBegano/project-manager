@@ -6,7 +6,7 @@
 
     <groupId>io.github.eldinbegano</groupId>
     <artifactId>mlp-project-manager</artifactId>
-    <version>0.4.0</version>
+    <version>1.0.0</version>
 
     <name>MLP Project Manager</name>
     <description>Terminal-based manager</description>
